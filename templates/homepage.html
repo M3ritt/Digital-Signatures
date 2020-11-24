@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Homepage </title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='possible_style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+<div class="sidenav">
+    <a href="/"> Homepage </a>
+    <button class="dropdown-btn"> Digital Signature
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="/digital_signature">Digital Signature</a>
+        <a href="/digital_signature#what_is">What is it</a>
+        <a href="/digital_signature#history">History</a>
+        <a href="/digital_signature#uses">Uses</a>
+        <a href="/digital_signature#how">How</a>
+        <a href="/digital_signature#time_difference">RSA module size</a>
+        <a href="/digital_signature#example">Example</a>
+    </div>
+    <a href="/example">Demo</a>
+    <a href="/time_difference">Time difference</a>
+    <a href="/about_us">About us</a>
+</div>
+
+<div class = "main">
+    <h1> Welcome </h1>
+    <br><br><br>
+    <a> This is a website created for Associate Professor:
+        <a href = "https://www.oswego.edu/mathematics/content/elizabeth-wilcox" target = "_blank"> Elizabeth Wilcox </a>
+        for MAT/CSC 332: Cryptology.
+
+        <h3> Links and what is on them: </h3>
+        <ul>
+            <li> <a href = "/" >Homepage</a>: this page </li>
+            <li> <a href = "/digital_signature" >Digital Signature</a>: Some background information about digital signatures.
+                This contains the following sections: </li>
+            <ul>
+                <li> <a href="/digital_signature#what_is">What is it</a> </li>
+                <li> <a href="/digital_signature#history">History</a> </li>
+                <li> <a href="/digital_signature#uses">Uses</a> </li>
+                <li> <a href="/digital_signature#how">How</a> </li>
+                <li> <a href="/digital_signature#time_difference">RSA module size</a> </li>
+                <li> <a href="/digital_signature#example">Example</a> </li>
+            </ul>
+            <li> <a href = "/example" >Demo</a>: Demonstration of what a digital signature is by going step by step through the process of creating and verifying a digital signature.  </li>
+            <li> <a href = "/time_difference" >Time difference</a>: Demonstration of how different bit sizes make it more complex. </li>
+            <li> <a href = "/about_us" >About us</a>: information about creators of this project.</li>
+        </ul>
+
+        The code for everything can be found on:
+        <a href = "https://github.com/M3ritt/Digital-Signatures" target = "_blank"> GitHub </a>
+        <br>
+        For the code to replicate the <a href="/digital_signature#example"> example screenshots</a> on <a href = "/digital_signature" >Digital Signature</a> page:
+        <a href = "https://github.com/M3ritt/Digital-Signatures/tree/master/Demonstration" target = "_blank"> GitHub </a>
+    </a>
+</div>
+<script src="{{ url_for('static', filename='js/navigation_bar_loop.js') }}"></script>
+</body>
+</html>

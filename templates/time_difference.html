@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Time difference </title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='possible_style.css') }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="{{ url_for('static', filename='js/time_form.js') }}"></script>
+</head>
+
+<body>
+
+<div class="sidenav">
+	<a href="/"> Homepage </a>
+	<button class="dropdown-btn"> Digital Signature
+		<i class="fa fa-caret-down"></i>
+	</button>
+	<div class="dropdown-container">
+		<a href="/digital_signature">Digital Signature</a>
+		<a href="/digital_signature#what_is">What is it</a>
+		<a href="/digital_signature#history">History</a>
+		<a href="/digital_signature#uses">Uses</a>
+		<a href="/digital_signature#how">How</a>
+		<a href="/digital_signature#time_difference">RSA module size</a>
+		<a href="/digital_signature#example">Example</a>
+	</div>
+	<a href="/example">Demo</a>
+	<a href="/time_difference">Time difference</a>
+	<a href="/about_us">About us</a>
+</div>
+
+<div class="main">
+	<h1> Time difference </h1> <br><br>
+	<a>
+		This is a way to see a a difference in time it takes to solve based amount of bits when generating keys. <br>
+		<br>Select the two different bit sizes you want to use: <br>
+		<i> Note: Make sure both bit sizes are multiples of 1024</i>
+	</a>
+
+
+	<form class="form-inline">
+		<h4> First bit size: </h4>
+		<div class="form-group">
+			<label class="sr-only" for="first_bit"> <b>First bit size:</b> </label><br>
+			<input type="number" size = "100" class="form-control" id="first_bit" placeholder="1024">
+		</div><br>
+
+		<h4> Second bit size:</h4>
+		<div class="form-group">
+			<label class="sr-only" for="second_bit"> <b>Second bit size:</b> </label><br>
+			<input type="number" size = "100" class="form-control" id="second_bit" placeholder="2048">
+		</div><br>
+
+		<h4> Data to be sent: </h4>
+		<div class="form-group">
+			<label class="sr-only" for="original_input"> <b>Data to be sent:</b>  </label><br>
+			<input type="text" size = "100" class="form-control" id="original_input" placeholder="Some data that might have been tampered with">
+		</div><br><br>
+
+		<h4> Data to be received: </h4>
+		<div class="form-group">
+			<label class="sr-only" for="new_input"> <b>Data to be received:</b>  </label><br>
+			<input type="text" size = "100" class="form-control" id="new_input" placeholder="Some data that might have been tampered with">
+		</div><br><br>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form><br>
+
+	<div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+
+	<h4> First bit size:</h4>
+	<div id="first_bit_size" class="alert alert-success" role="alert" style="display:none;", ></div>
+	<br>
+
+	<h4> Second bit size:</h4>
+	<div id="second_bit_size" class="alert alert-success" role="alert" style="display:none;"></div>
+	<br>
+
+	<h4> Time difference: </h4>
+	<div id="difference" class="alert alert-success" role="alert" style="display:none;"></div>
+	<br>
+
+	<h3> The signature is:</h3>
+	<div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+	<br><br><br>
+</div>
+<script src="{{ url_for('static', filename='js/navigation_bar_loop.js') }}"></script>
+</body>
+</html>

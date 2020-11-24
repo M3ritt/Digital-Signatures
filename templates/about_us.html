@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> About us </title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='possible_style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+<div class="sidenav">
+    <a href="/"> Homepage </a>
+    <button class="dropdown-btn"> Digital Signature
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="/digital_signature">Digital Signature</a>
+        <a href="/digital_signature#what_is">What is a Digital Signature</a>
+        <a href="/digital_signature#history">History</a>
+        <a href="/digital_signature#uses">Uses</a>
+        <a href="/digital_signature#how">How</a>
+        <a href="/digital_signature#time_difference">RSA module size</a>
+        <a href="/digital_signature#example">Example</a>
+    </div>
+    <a href="/example">Demo</a>
+    <a href="/time_difference">Time difference</a>
+    <a href="/about_us">About us</a>
+</div>
+
+<div class = "main">
+    <h1> About us </h1><br><br>
+
+    <h3> Head web developer : Josh Meritt </h3>
+    <a>
+        Josh is a senior at SUNY Oswego who is majoring in Computer Science with a minor in Information Science.
+        Throughout his career at SUNY Oswego, he has worked with FindingFive on a Quality Assurance team for a study store product as well as
+        worked as a web developer intern for SUNY Oswego Campus Recreation.
+
+        <h3> Head mathematician : Kira Garguilo</h3>
+        Kira is a sophomore at SUNY Oswego who is double majoring in Adolescent Education for Math and Mathematics and a minor in criminal justice.
+        She is also a member in various different clubs including; Delta Phi Epsilon, the investment club and the Women in computing club.
+
+        <h3> Secondary web developer/mathematician : Eric Simonetti</h3>
+        Eric worked as the secondary mathematician/web developer for this project; communicating the mathematical ideas and ways to possibly incorporate it.<br>
+        Eric is double majoring in Mathematics and Computer Science. Eric is also a member of Phi Kappa Phi honors society.
+    </a>
+</div>
+<script src="{{ url_for('static', filename='js/navigation_bar_loop.js') }}"></script>
+</body>
+</html>

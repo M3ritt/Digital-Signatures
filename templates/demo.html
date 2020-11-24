@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Demo </title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='possible_style.css') }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="{{ url_for('static', filename='js/signature_form.js') }}"></script>
+</head>
+
+<body>
+
+<div class="sidenav">
+	<a href="/"> Homepage </a>
+	<button class="dropdown-btn"> Digital Signature
+		<i class="fa fa-caret-down"></i>
+	</button>
+	<div class="dropdown-container">
+		<a href="/digital_signature">Digital Signature</a>
+		<a href="/digital_signature#what_is">What is it</a>
+		<a href="/digital_signature#history">History</a>
+		<a href="/digital_signature#uses">Uses</a>
+		<a href="/digital_signature#how">How</a>
+		<a href="/digital_signature#time_difference">RSA module size</a>
+		<a href="/digital_signature#example">Example</a>
+	</div>
+	<a href="/example">Demo</a>
+	<a href="/time_difference">Time difference</a>
+	<a href="/about_us">About us</a>
+</div>
+
+<div class="main">
+	<h1> Demonstration </h1> <br><br>
+	<a>
+		This is a live demo of how a digital signature is made and verified.
+		A user can enter the bit size, if not it automatically is set to 1024, as well as some data,
+		being some sort of text and then the data that would be received.
+		If the data is the same, then the signature is verified and if not, then it is not verified.
+		<br><br>
+		Once the data is entered and the submit button is pressed; the keys and signatures will show up,
+		along with whether the signature is verified or not.
+		<br><br>
+
+		<form class="form-inline">
+			<h4> Bit size (optional)</h4>
+			<div class="form-group">
+				<label class="sr-only" for="first_bit"> <b>First bit size:</b> </label><br>
+				<input type="number" size = "100" class="form-control" id="first_bit" placeholder="1024">
+			</div><br>
+
+			<h4> Data to be sent: </h4>
+			<div class="form-group">
+				<label class="sr-only" for="original_input"> <b>Data to be sent:</b> </label><br>
+				<input type="text" size = "100" class="form-control" id="original_input" placeholder="Some data">
+			</div><br>
+
+			<h4> Data to be received: </h4>
+			<div class="form-group">
+				<label class="sr-only" for="new_input"> <b>Data to be received:</b>  </label><br>
+				<input type="text" size = "100" class="form-control" id="new_input" placeholder="Some data that might have been tampered with">
+			</div><br><br>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form><br>
+
+		<div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+
+		<h4> Bit size:</h4>
+		<div id="first_bit_size" class="alert alert-success" role="alert" style="display:none;", ></div>
+		<br>
+
+		<h4> Public key:</h4>
+		<i> (n,e) =  </i>
+		<div id="publicKeyAlert" class="alert alert-success" role="alert" style="display:none;", ></div>
+		<br>
+
+		<h4> Private key:</h4>
+		<i> (n,d) =</i>
+		<div id="privateKeyAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+		<br>
+
+		<h4> Generated Hash of sent data: </h4>
+		<i> (Once encoded to bytes, this is raised to power 'd' modulo 'n' from key previously generated) </i>
+		<div id="originalSignatureAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+		<br>
+
+		<h4> Generated Hash of received data:</h4>
+		<i>(Once encoded to bytes, this is raised to the power 'e' module 'n' from key previously generated)</i>
+		<div id="newSignatureAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+		<br>
+
+		<h3> The signature is:</h3>
+		<div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+	</a>
+	<br><br><br>
+</div>
+<script src="{{ url_for('static', filename='js/navigation_bar_loop.js') }}"></script>
+</body>
+</html>
