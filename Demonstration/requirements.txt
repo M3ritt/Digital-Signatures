@@ -1,1 +1,2 @@
 pycryptodomex==3.9.7
+xlwt~=1.3.0
