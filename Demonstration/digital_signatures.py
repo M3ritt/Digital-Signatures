@@ -18,6 +18,8 @@ from Cryptodome.PublicKey import RSA
 from hashlib import sha512
 # threading is used to have multiple threads to get average time it takes to run for certain bit size
 from threading import Thread
+# Uses excel to provide some analysis of key pair bit size
+from xlwt import Workbook
 
 # Global bit_size for bit_size for easy change when needed
 global bit_size
@@ -215,7 +217,7 @@ def find_average_time(text, is_valid_text):
     average_time += average
 
 
-def threading(text, is_valid_text, num):
+def threading(text, is_valid_text, num, single_thread):
     """
         Main method to find average time. Uses Threads to find average time based on:
             - bit size of key pair
@@ -229,6 +231,8 @@ def threading(text, is_valid_text, num):
             text : The data that was sent
             is_valid_text : The data that was received
             num : the number of threads to be created
+            single_thread : boolean value on whether to print if it is validating.
+                - Gets cluttered when running if getting average of multiple threads
 
         @print:
             - The average time
@@ -239,7 +243,8 @@ def threading(text, is_valid_text, num):
     average_time = 0
     threads = []
     for n in range(num):
-        print("[Validating]\n")
+        if single_thread:
+            print("[Validating]\n")
         thread = Thread(target=find_average_time, args=(text, is_valid_text))
         thread.start()
         threads.append(thread)
@@ -251,24 +256,100 @@ def threading(text, is_valid_text, num):
     sent_byte_size = len(text.encode('utf-8'))
     received_byte_size = len(is_valid_text.encode('utf-8'))
     print("[Average time] : ", average_time, ' [Sent data size] :', sent_byte_size, ' bytes  [Received data size] : ',
-          received_byte_size, ' bytes [Runs] : ', num)
+          received_byte_size, ' bytes [Runs] : ', num, " [key pair size]: ", bit_size)
+    return average_time, bit_size
 
 
-def number_checker():
+def is_writing_to_workbook(number_of_runs, text, num_of_threads, is_workbook):
+    """
+        Method just to check whether data is being written to an excel file
+
+        @param:
+            number_of_runs : Number of different bit sizes to enter
+            text : The data that was sent/received. Only assuming valid signature for this
+            num_of_threads : the number of threads to be created for each bit size
+            is_workbook : Boolean whether data is being written
+    """
+    if is_workbook:
+        write_multiple_average_tests(number_of_runs, text, num_of_threads)
+    else:
+        multiple_average_tests(number_of_runs, text, num_of_threads)
+
+
+def write_multiple_average_tests(number_of_runs, text, num_of_threads):
+    """
+        Method to run as many tests as desired with as many threads to find the average times.
+        Writes data to an excel file to easily create graph and view data.
+
+        @param:
+            number_of_runs : Number of different bit sizes to enter
+            text : The data that was sent/received. Only assuming valid signature for this
+            num_of_threads : the number of threads to be created for each bit size
+
+        @end:
+            Writes to an excel sheet that is stored in the folder this was ran in
+    """
+    global bit_size
+    temp = bit_size
+    bit_size = 1024
+    wb = Workbook()
+    sheet1 = wb.add_sheet('Sheet_1', cell_overwrite_ok=True)
+    sheet1.write(0, 1, "Bit size")
+    sheet1.write(0, 1, "Average time")
+    for n in range(number_of_runs):
+        print("\n[Validating] :", bit_size)
+        curr_average_time, curr_bit_size = threading(text, text, num_of_threads, False)
+        sheet1.write(n, 1, curr_bit_size)
+        sheet1.write(n, 2, curr_average_time)
+        bit_size += 1024
+    bit_size = temp
+    wb.save('Averages_1.xls')
+
+
+def multiple_average_tests(number_of_runs, text, num_of_threads):
+    """
+        Method to run as many tests as desired with as many threads to find the average times.
+
+        @param:
+            number_of_runs : Number of different bit sizes to enter
+            text : The data that was sent/received. Only assuming valid signature for this
+            num_of_threads : the number of threads to be created for each bit size
+    """
+    global bit_size
+    temp = bit_size
+    bit_size = 1024
+    for n in range(number_of_runs):
+        print("\n[Validating] :", bit_size)
+        threading(text, text, num_of_threads, False)
+        bit_size += 1024
+    bit_size = temp
+
+
+def number_checker(num_bit_size):
     """
         Method to error check the number of runs to ensure that it is a number.
+
+        @param:
+            num_bit_size : boolean value whether it is the bit size being checked
 
         @return:
             value :  The value of the number
     """
     while True:
-        num = input("\n@User: Number of runs to average: \n")
-        try:
-            value = int(num)
-            print("\n")
-            return value
-        except ValueError or TypeError:
-            print("[Error] Incorrect type. Try an integer.")
+        if num_bit_size:
+            num = input("\n@User: Number of bits to average: \n")
+            try:
+                value = int(num)
+                return value
+            except ValueError or TypeError:
+                print("[Error] Incorrect type. Try an integer.")
+        else:
+            num = input("\n@User: Number of runs to average: \n")
+            try:
+                value = int(num)
+                return value
+            except ValueError or TypeError:
+                print("[Error] Incorrect type. Try an integer.")
 
 
 def bit_size_checking(some_bit_size):
@@ -328,10 +409,13 @@ def commands():
                 
                   "--average_time : finds the average time to run based on given number of trials\n"
                   
+                  "--multiple_averages : "
+                  "finds the time of multiples averages; prints them to screen and can be written to an excel file\n"
+                  
                   "--exit : exits the program")
 
         elif command == "--run":
-            text = input("@User: Data to be sent: \n")
+            text = input("\n@User: Data to be sent: \n")
             is_valid_input = input("\n@User: Data that is received: \n")
             print("\n [Validating] ")
             digital_signature_runner(text, is_valid_input, False)
@@ -368,11 +452,21 @@ def commands():
             compare_three_bits(first_bit_size, second_bit_size, third_bit_size, text, is_valid_text)
 
         elif command == "--average_time":
-            text = input("@User: Data to be sent: \n")
+            text = input("\n@User: Data to be sent: \n")
             is_valid_input = input("\n@User: Data that is received: \n")
-            num = number_checker()
+            num = number_checker(False)
             bit_size = int(get_new_bit_size())
-            threading(text, is_valid_input, num)
+            threading(text, is_valid_input, num, True)
+
+        elif command == "--multiple_averages":
+            text = input("\n@User: Data to be sent: \n")
+            runs = number_checker(True)
+            threads = number_checker(False)
+            is_workbook = input("\n@User: Would you like the data stored in a workbook?\n")
+            if is_workbook.lower() == 'yes' or is_workbook.lower() == 'y':
+                is_writing_to_workbook(runs, text, threads, True)
+            else:
+                is_writing_to_workbook(runs, text, threads, False)
 
         elif command == "--exit":
             print("\n [Exiting]")
