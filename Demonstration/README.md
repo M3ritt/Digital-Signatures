@@ -19,6 +19,8 @@ List of commands for digital_signatures.py:
  - --change_bit_size
  - --compare_bit_size
  - --compare_three_bit_sizes
+ - --average_time
+ - --multiple_averages
  - --help
  - --exit
 
@@ -27,6 +29,8 @@ What the commands do:
   - change_bit_size : allows the user to change the bit size.
   - compare_bit_size : allows a user to compare the time difference of verifying signatures of two different bit sizes.
   - compare_three_bit_size : allows a user to compare the time difference of verifying signatures of three different bit sizes.
+  - --average_time : finds the average time to run based on a given number of trials.
+  - --multiple_averages : finds the time of multiple averages; prints them to the screen and <i> can </i> be written to a workbook.
   - help : prints out all options.
   - exit : closes the program.
   </br>
