@@ -150,16 +150,16 @@
         <br>
 
         The difference in strength of the increasing RSA modulus size can be seen in the time it takes to encrypt and validate a digital signature.
-        Given the screenshot below, one can notice that the time it took for a bit size of 1024 is very low with a time of 0.25 seconds.
-        With a relatively large improvement, even the 2048 RSA modulus size was able to have a time over 3 times that of the 1024 bit size.
-        This is shown even more with the 3072 bit size with a whopping time of 8.87 seconds which is over 10 times longer than that of 2048 bits.
+        To further solidify this point; some benchmarks were created using our text based program by creating threads to run multiple tests at a time,
+        increasing the bit size by 1024 each time and getting the average time for each bit size.
+        The number of bytes that was being and received was the same for every test case and each signature was valid to ensure consistency.
         <br> <br>
 
         <center>
-            <img src ="../static/images/three_times.jpg" alt="time difference"> <br>
+            <img src ="../static/images/ten_averages.jpg" alt="time difference"> <br>
         </center> <br> <br>
         To show this further; a graph was constructed, using the text based program, that kept track of the average time it took for each bit size of the key pair,
-        increased by 1024 each time. <br>
+        increased by 1024 each time up to 15,360 bits. <br>
         <i> Notes: </i> <br>
         <ul>
             <li>
@@ -170,11 +170,15 @@
             <li> The average time is on the y-axis because it is dependant on the bit size.</li>
         </ul>
         <center>
-            <img src = "../static/images/bit_size_vs_average_time.jpg" alt ="bit size vs average time"> <br>
+            <img src = "../static/images/ten_averages_graph.jpg" alt ="bit size vs average time"> <br>
         </center> <br>
-        As seen by the graph, increasing the bit size of the key pair almost increases the average time at an exponential rate,
-        which starts to drastically take off starting at 8192 bits which had an average time of 3.23 minutes while increasing the
-        bit size to 11,264 bits had a whopping time of over 24 minutes, on average.
+        As seen by the graph, on average; increasing the bit size has a difference for the time it takes for the entire process to run.
+        Interestingly enough, for our averages cases; the graph seemed to be in the form of an exponential sine curve.
+        This is first seen at a key pair size of 8192 bits to 9126 bits which went from 7.03 minutes to 6.96 minutes.
+        This happens again from going from 11,264 bits to 12,288 and then most noticeably from 14,336 bits to 15,360 bits.
+        14,366 bits took a time of 70.5 minutes while 15,360 bits only took 60.7 minutes.
+        These time differences do not align quite with what was expected but this could be due to a number of causes including;
+        our code not being the most efficient or optimized
 
         <h5> As an aside: </h5>
         Additional tests were ran on the website version; the demonstration version on the website does not produce an output with a key pair of the bit size of 13,312 because it cannot handle it.
@@ -182,7 +186,7 @@
 
         <h5> Note: </h5>
         The code that produced these snippets can be found on:
-        <a href = "https://github.com/M3ritt/Digital-Signatures/tree/master/Demonstration" target = "_blank"> GitHub </a> <br> <br>
+        <a href = "https://github.com/M3ritt/Digital-Signatures/tree/main/Demonstration" target = "_blank"> GitHub </a> <br> <br>
 
         This can be played around with using the <a href="/time_difference">Time difference</a> page. <br>
         <i> Additional Note: This only allows two different bit sizes to be checked </i>
@@ -214,7 +218,7 @@
         <br>
         <h5> Note: </h5>
         The code that produced these snippets can be found on:
-        <a href = "https://github.com/M3ritt/Digital-Signatures/tree/master/Demonstration" target = "_blank"> GitHub </a>
+        <a href = "https://github.com/M3ritt/Digital-Signatures/tree/main/Demonstration" target = "_blank"> GitHub </a>
     </a>
 
     <h3> Resources: </h3>
