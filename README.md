@@ -2,7 +2,7 @@
 
 <i> Note: </i> Since no database or endpoints were used for the website; the flask server cannot be deployed on a Linux device. Even using a display server such as Xming does not allow the flask server to be opened. The /Demonstration directory can be ran on a Linux device but server.py must be ran and opened on something other than a Linux device. 
 
-<br>
+<h2> Installation: </h2>
 This contains the code for a development server for a website as well as a small program that demonstrates how a digital signature works. The website is ran using Flask, hence why it is only a development server and not production. If desired to be ran on a production server, the Flask application can be run with Nginx using Gunicorn which would most likely be the most efficient way but did not feel it was necessary for this assignment.
 
 If either the Flask Instance of the website or the demonstration program is desired to be ran, one must ensure that all of the required packages are installed by using the following command:<br>
@@ -28,16 +28,28 @@ If the website is not desired, then the /Demonstration can still be used as a so
 Note: <br>
 All python code is commented to help ensure the readers understanding of how the process of digital signatures works.
 
-The directories and outside files: 
-   - /Demonstration is the python program that can be used to look at digital signatures without the website. Seperate from the website but usable.
-   - /static contains all of the static files for the website to be styled correctly, including images, JavaScript and CSS files.  
-   - /templates contains the html pages that are being used. 
-   - requirements.txt is the file containing all the necessary packages.
-   - server.py is the code for the Flask server.
-   - signatures.py is the code used to generate the information about the digital signatures.
+<h2> Contents: </h2>
+<ul> 
+   <li> /Demonstration is the python program that can be used to look at digital signatures without the website. Seperate from the website but usable. </li> 
+   <li> /static contains all of the static files for the website to be styled correctly, including images, JavaScript and CSS files.   </li>
+   <li> /templates contains the html pages that are being used.  </li>
+   <li> requirements.txt is the file containing all the necessary packages. </li>
+   <li> server.py is the code for the Flask server. </li>
+   <li> signatures.py is the code used to generate the information about the digital signatures. </li>
+ </ul>
    
    
-<b> Authors </b>
+ <h2> Examples </h2> 
+ Demonstration Example: 
+ 
+ ![Demo_Example](https://user-images.githubusercontent.com/36414900/113208937-6a111a00-9240-11eb-8f4e-4729c4e65801.png)
+
+Website Example: 
+
+![Website_Example](https://user-images.githubusercontent.com/36414900/113208980-772e0900-9240-11eb-83f4-fac45aa54e8a.png)
+
+ 
+<h2> Authors: </h2>
 <ul> 
    <li> Josh Meritt  </li>
    <li> Eric Simonetti  </li>
